@@ -1,0 +1,300 @@
+﻿<Window
+    x:Class="BarcodeDrugChecker.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:BarcodeDrugChecker.AttachProperties"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="clr-namespace:BarcodeDrugChecker.Extension"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prop="clr-namespace:BarcodeDrugChecker.Properties"
+    xmlns:uc="clr-namespace:BarcodeDrugChecker.UserDefineControl"
+    xmlns:v="clr-namespace:BarcodeDrugChecker.ValidationRules"
+    Title="Barcode Drug Checker"
+    MaxWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.91'}"
+    MaxHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.95'}"
+    Left="0"
+    SizeToContent="WidthAndHeight"
+    Top="0"
+    WindowStartupLocation="Manual"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DGDrugListStyle" TargetType="DataGridRow">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Height" Value="25" />
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LawnGreen"/>
+                </Style.Resources>
+                <Style.Triggers>
+                    <!--
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="Blue" />
+                    </Trigger> -->
+                    <DataTrigger Binding="{Binding BarcodeChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                        <Setter Property="Background" Value="White" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding BarcodeChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                        <Setter Property="Background" Value="LightGreen" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <ScrollViewer
+        Grid.Row="0"
+        HorizontalScrollBarVisibility="Auto"
+        PanningMode="Both"
+        VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--  Menu Bar  -->
+                <RowDefinition Height="auto" />
+                <!--  HN Input  -->
+                <RowDefinition Height="auto" />
+                <!--  Patient Info  -->
+                <RowDefinition Height="auto" />
+                <!--  Allergies and DI  -->
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <GroupBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10">
+                <GroupBox.Header>
+                    <TextBlock Style="{StaticResource TitleText}" Text="{x:Static prop:Resources.lbl_searchPatientGB}" />
+                </GroupBox.Header>
+                <GroupBox.Content>
+                    <StackPanel Margin="5">
+                        <StackPanel>
+                            <Label Content="{x:Static prop:Resources.lbl_hn}" Style="{StaticResource LabelText}" />
+                            <StackPanel Margin="0,5" Orientation="Horizontal">
+                                <TextBox
+                                    Name="PatientID"
+                                    Width="260"
+                                    Margin="5,0"
+                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
+                                    ext:FocusExtension.IsFocused="{Binding ShouldPatientHNFocus}"
+                                    MaxLines="1"
+                                    Style="{StaticResource TextboxText}">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Mode="TwoWay"
+                                            Path="CurrentPatientHN"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <v:StringToInt ValidationStep="RawProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Return" Command="{Binding FindPatientCommand}" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Button
+                                    Name="HNSearchBtn"
+                                    Margin="5,0"
+                                    Command="{Binding FindPatientCommand}"
+                                    Content="{x:Static prop:Resources.txt_hnSearchBtn}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="Padding" Value="5" />
+                                            <Setter Property="MinWidth" Value="50" />
+                                            <Setter Property="IsEnabled" Value="False" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PatientID}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="Padding" Value="5" />
+                                                    <Setter Property="MinWidth" Value="50" />
+                                                    <Setter Property="IsEnabled" Value="True" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button
+                                    Width="50"
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding ResetMainWindowCommand}"
+                                    Content="{x:Static prop:Resources.txt_clearBtn}"
+                                    Style="{StaticResource ButtonStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock
+                            Foreground="{Binding PatientMessageColor}"
+                            Style="{StaticResource StatusIndicatorText}"
+                            Text="{Binding PatientSearchChecker}"
+                            TextWrapping="Wrap"
+                            Visibility="{Binding PatientStatusMessageVisibility, Mode=OneWay}" />
+                    </StackPanel>
+                </GroupBox.Content>
+            </GroupBox>
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Margin="0,5,5,5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="DBSettingButton_Click">
+                <Button.Content>
+                    <Image
+                        Width="16"
+                        Height="16"
+                        Source="/Assets/Image/settings.png" />
+                </Button.Content>
+            </Button>
+            <GroupBox
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10">
+                <GroupBox.Header>
+                    <TextBlock Style="{StaticResource TitleText}" Text="{x:Static prop:Resources.lbl_patientInfoGB}" />
+                </GroupBox.Header>
+                <StackPanel Margin="10" Visibility="{Binding PatientInfoVisibility, Mode=OneWay}">
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        Style="{StaticResource PatientInfoText}"
+                        Text="{Binding Patient.HN}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        Style="{StaticResource PatientInfoText}"
+                        Text="{Binding Patient.FullName}" />
+                    <StackPanel Margin="0,10" Orientation="Horizontal">
+                        <uc:PatientAllergyControl Margin="10" DataContext="{Binding Path=DataContext.PatientAllergyViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                        <uc:DrugInteractionControl Margin="10" DataContext="{Binding Path=DataContext.DrugInteractionViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="10">
+                <GroupBox.Header>
+                    <TextBlock Style="{StaticResource TitleText}" Text="{x:Static prop:Resources.lbl_drugLstGB}" />
+                </GroupBox.Header>
+                <GroupBox.Content>
+                    <VirtualizingStackPanel>
+                        <StackPanel Margin="0,5,5,10">
+                            <Label Content="{x:Static prop:Resources.lbl_icode}" Style="{StaticResource LabelText}" />
+                            <StackPanel Margin="0,5" Orientation="Horizontal">
+                                <TextBox
+                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
+                                    Name="ICodeTextBox"
+                                    Width="260"
+                                    Margin="5,0"
+                                    ext:FocusExtension.IsFocused="{Binding ShouldICodeInputFocus}"
+                                    IsEnabled="{Binding IsICodeInputEnable, Mode=OneWay}"
+                                    MaxLines="1"
+                                    Style="{StaticResource TextboxText}"
+                                    Text="{Binding CurrentICode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Return" Command="{Binding ICodeInputCommand, UpdateSourceTrigger=PropertyChanged}" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Button
+                                    Width="67"
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding ICodeInputCommand}"
+                                    Content="{x:Static prop:Resources.txt_icodeSendBtn}"
+                                    IsEnabled="{Binding IsICodeInputEnable, Mode=OneWay}"
+                                    Style="{StaticResource ButtonStyle}" />
+                            </StackPanel>
+                            <TextBlock
+                                Margin="5"
+                                Foreground="{Binding ICodeMessageColor}"
+                                Style="{StaticResource StatusIndicatorText}"
+                                Visibility="{Binding ICodeStatusMessageVisibility, Mode=OneWay}">
+                                <InlineUIContainer>
+                                    <Image
+                                        Width="25"
+                                        Height="25"
+                                        Margin="5,0"
+                                        Source="{Binding IndicatorIconImgSource, Mode=OneWay}" />
+                                </InlineUIContainer>
+                                <Run Text="{Binding DrugListChecker, Mode=OneWay}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource InfoText}" Foreground="{Binding CounterMessageColor, Mode=OneWay}" Text="{Binding DrugRemainCounterText, Mode=OneWay}" />
+                        </StackPanel>
+                        <DataGrid
+                            Name="drugList"
+                            MaxHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.15'}"
+                            AutoGenerateColumns="False"
+                            ap:SelectingItemDatagrid.SelectingItem="{Binding SelectedDrug}"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            ColumnHeaderStyle="{StaticResource DGColText}"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding DrugRetrievalList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            RowStyle="{StaticResource DGDrugListStyle}"
+                            ScrollViewer.CanContentScroll="False"
+                            SelectedItem="{Binding SelectedDrug}"
+                            Style="{StaticResource GenericNoItemStyle}"
+                            Visibility="{Binding ICodeDataGridVisibility, Mode=OneWay}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ICode}" Header="{x:Static prop:Resources.lbl_icodeGCol}" />
+                                <DataGridTextColumn Binding="{Binding GenericName}" Header="{x:Static prop:Resources.lbl_drugNameGCol}" />
+                                <DataGridTextColumn Binding="{Binding Quantity}" Header="{x:Static prop:Resources.lbl_qtyGCol}" />
+                                <DataGridTextColumn Binding="{Binding DrugUnit}" Header="{x:Static prop:Resources.lbl_drugUnitGCol}" />
+                                <DataGridTextColumn Binding="{Binding DrugManualCode}" Header="{x:Static prop:Resources.lbl_shortlstGCol}" />
+                                <DataGridTextColumn
+                                    Binding="{Binding BarcodeChecked}"
+                                    Header="Barcode Check"
+                                    Visibility="Collapsed" />
+                                <DataGridTextColumn
+                                    Binding="{Binding VisitTimeFormat}"
+                                    Header="{x:Static prop:Resources.lbl_vstdateGCol}"
+                                    Visibility="Collapsed" />
+                                <DataGridTextColumn
+                                    Binding="{Binding RXTimeFormat}"
+                                    Header="{x:Static prop:Resources.lbl_rxtimeGCol}"
+                                    Visibility="Collapsed" />
+                                <DataGridTextColumn
+                                    Binding="{Binding IsInjection}"
+                                    Header="Is Injection"
+                                    Visibility="Collapsed" />
+                                <DataGridTextColumn
+                                    Binding="{Binding Instruction}"
+                                    Header="Drug Manual"
+                                    Visibility="Collapsed" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <GroupBox Margin="10">
+                            <GroupBox.Header>
+                                <TextBlock Style="{StaticResource TitleText}" Text="{x:Static prop:Resources.lbl_drugImgGB}" />
+                            </GroupBox.Header>
+                            <StackPanel VerticalAlignment="Center">
+                                <StackPanel Visibility="{Binding DrugImageVisibility, Mode=OneWay}">
+                                    <Image
+                                        MaxWidth="300"
+                                        MaxHeight="300"
+                                        Source="{Binding DImg, Mode=OneWay}" />
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding NoImageTextVisibility, Mode=OneWay}">
+                                    <TextBlock
+                                        Margin="5,5,5,10"
+                                        Style="{StaticResource CenterStatusIndicatorText}"
+                                        Text="{Binding DrugImageChecker, Mode=OneWay}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </VirtualizingStackPanel>
+                </GroupBox.Content>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</Window>

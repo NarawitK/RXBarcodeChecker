@@ -1,0 +1,10 @@
+BarcodeDrugChecker/App.7z
+BarcodeDrugChecker/App.config
+BarcodeDrugChecker/bin/*
+BarcodeDrugChecker/obj/*
+BarcodeDrugCheckerLib/bin/*
+BarcodeDrugCheckerLib/obj/*
+Database/*
+App.config
+.vs/BarcodeDrugChecker/v16/.suo
+.vs/BarcodeDrugChecker/DesignTimeBuild/.dtbcache.v2

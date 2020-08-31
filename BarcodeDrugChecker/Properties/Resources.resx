@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="allergyDG_agent" xml:space="preserve">
+    <value>ยาที่แพ้</value>
+  </data>
+  <data name="allergyDG_hn" xml:space="preserve">
+    <value>HN</value>
+  </data>
+  <data name="allergyDG_symptom" xml:space="preserve">
+    <value>อาการ</value>
+  </data>
+  <data name="allergy_encounter_status" xml:space="preserve">
+    <value>จำนวนยาแพ้:</value>
+  </data>
+  <data name="allergy_status_hasEntries" xml:space="preserve">
+    <value>ผู้ป่วยแพ้ยา</value>
+  </data>
+  <data name="allergy_status_normal" xml:space="preserve">
+    <value>ไม่มียาที่แพ้</value>
+  </data>
+  <data name="allergy_title" xml:space="preserve">
+    <value>ข้อมูลการแพ้ยา</value>
+  </data>
+  <data name="dbsetting.address" xml:space="preserve">
+    <value>ที่อยู่ IP</value>
+  </data>
+  <data name="dbsetting.applybtn" xml:space="preserve">
+    <value>ใช้งาน</value>
+  </data>
+  <data name="dbsetting.password" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="dbsetting.testbtn" xml:space="preserve">
+    <value>ทดสอบการเชื่อมต่อ</value>
+  </data>
+  <data name="dbsetting.username" xml:space="preserve">
+    <value>บัญชีฐานข้อมูล</value>
+  </data>
+  <data name="dbsetting_applyPass" xml:space="preserve">
+    <value>ตั้งค่าสำเร็จ</value>
+  </data>
+  <data name="dbsetting_testfail" xml:space="preserve">
+    <value>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</value>
+  </data>
+  <data name="dbsetting_testpass" xml:space="preserve">
+    <value>ทดสอบเชื่อมต่อฐานข้อมูลสำเร็จ</value>
+  </data>
+  <data name="db_setting_applyFailed" xml:space="preserve">
+    <value>เกิดข้อผิดพลาดในการตั้งค่า</value>
+  </data>
+  <data name="di_closeNoteBtnTxt" xml:space="preserve">
+    <value>ปิด Note</value>
+  </data>
+  <data name="di_defaultNoteBtntxt" xml:space="preserve">
+    <value>คลิกเพื่อเปิด/ปิด Note</value>
+  </data>
+  <data name="di_encounter_status" xml:space="preserve">
+    <value>จำนวน Drug Interaction ที่พบ:</value>
+  </data>
+  <data name="di_firstdrug" xml:space="preserve">
+    <value>ยาลำดับแรก</value>
+  </data>
+  <data name="di_note" xml:space="preserve">
+    <value>โน้ต</value>
+  </data>
+  <data name="di_openNoteBtnTxt" xml:space="preserve">
+    <value>เปิด Note</value>
+  </data>
+  <data name="di_seconddrug" xml:space="preserve">
+    <value>ยาลำดับที่สอง</value>
+  </data>
+  <data name="di_status_hasEntries" xml:space="preserve">
+    <value>ผู้ป่วยมี Drug Interaction(s)</value>
+  </data>
+  <data name="di_status_normal" xml:space="preserve">
+    <value>ไม่มี Drug Interaction(s)</value>
+  </data>
+  <data name="di_title" xml:space="preserve">
+    <value>ข้อมูล Drug Interactions</value>
+  </data>
+  <data name="lbl_drugImgGB" xml:space="preserve">
+    <value>รูปภาพยา</value>
+  </data>
+  <data name="lbl_drugLstGB" xml:space="preserve">
+    <value>รายการยา</value>
+  </data>
+  <data name="lbl_drugNameGCol" xml:space="preserve">
+    <value>ชื่อยา</value>
+  </data>
+  <data name="lbl_drugUnitGCol" xml:space="preserve">
+    <value>หน่วย</value>
+  </data>
+  <data name="lbl_hn" xml:space="preserve">
+    <value>รหัสผู้ป่วย</value>
+  </data>
+  <data name="lbl_icode" xml:space="preserve">
+    <value>รหัสยา</value>
+  </data>
+  <data name="lbl_icodeGCol" xml:space="preserve">
+    <value>รหัสยา</value>
+  </data>
+  <data name="lbl_patientInfoGB" xml:space="preserve">
+    <value>ข้อมูลผู้ป่วย</value>
+  </data>
+  <data name="lbl_patientName" xml:space="preserve">
+    <value>ชื่อ</value>
+  </data>
+  <data name="lbl_qtyGCol" xml:space="preserve">
+    <value>จำนวนยา</value>
+  </data>
+  <data name="lbl_rxtimeGCol" xml:space="preserve">
+    <value>เวลาจ่ายยา</value>
+  </data>
+  <data name="lbl_searchPatientGB" xml:space="preserve">
+    <value>ค้นหาผู้ป่วยด้วย HN</value>
+  </data>
+  <data name="lbl_shortlstGCol" xml:space="preserve">
+    <value>คำแนะนำการใช้ยา</value>
+  </data>
+  <data name="lbl_vstdateGCol" xml:space="preserve">
+    <value>เวลาเข้ารับบริการ</value>
+  </data>
+  <data name="msg_DImgError" xml:space="preserve">
+    <value>เกิดข้อผิดพลาด</value>
+  </data>
+  <data name="msg_hnNotConform" xml:space="preserve">
+    <value>รหัสผู้ป่วยไม่ถูกต้อง</value>
+  </data>
+  <data name="msg_icodeEmpty" xml:space="preserve">
+    <value>สแกนหรือใส่รหัสยาก่อน</value>
+  </data>
+  <data name="msg_icodeError" xml:space="preserve">
+    <value>เกิดข้อผิดพลาด</value>
+  </data>
+  <data name="msg_icodeFound" xml:space="preserve">
+    <value>ถูกเช็คแล้ว</value>
+  </data>
+  <data name="msg_icodeListEmpty" xml:space="preserve">
+    <value>รายการยาโหลดไม่ได้ หรือไม่มีข้อมูล</value>
+  </data>
+  <data name="msg_icodeNotFound" xml:space="preserve">
+    <value>ไม่พบยานี้ในรายการยา</value>
+  </data>
+  <data name="msg_patientError" xml:space="preserve">
+    <value>เกิดข้อผิดพลาด</value>
+  </data>
+  <data name="msg_patientFound" xml:space="preserve">
+    <value>พบผู้ป่วยหมายเลข</value>
+  </data>
+  <data name="msg_patientNotFound" xml:space="preserve">
+    <value>ไม่พบผู้ป่วยหมายเลข</value>
+  </data>
+  <data name="setting_datastage" xml:space="preserve">
+    <value>ประเภทข้อมูลในฐานข้อมูล</value>
+  </data>
+  <data name="setting_dbtitle" xml:space="preserve">
+    <value>ระบบฐานข้อมูล</value>
+  </data>
+  <data name="setting_title" xml:space="preserve">
+    <value>การตั้งค่า</value>
+  </data>
+  <data name="txt_clearBtn" xml:space="preserve">
+    <value>เคลียร์</value>
+  </data>
+  <data name="txt_hnSearchBtn" xml:space="preserve">
+    <value>ค้นหา</value>
+  </data>
+  <data name="txt_icodeSendBtn" xml:space="preserve">
+    <value>เช็ครหัสยา</value>
+  </data>
+  <data name="txt_noDataDG" xml:space="preserve">
+    <value>--- ไม่มีข้อมูลแสดง ---</value>
+  </data>
+  <data name="txt_noDImg" xml:space="preserve">
+    <value>-- ไม่มีรูปภาพแสดง ---</value>
+  </data>
+  <data name="txt_remDrug" xml:space="preserve">
+    <value>จำนวนยาที่เหลือในรายการ: </value>
+  </data>
+</root>

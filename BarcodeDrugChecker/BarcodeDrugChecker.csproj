@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile />
+    <StartupObject>BarcodeDrugChecker.App</StartupObject>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AssemblyName>BarcodeDrugChecker</AssemblyName>
+    <Version>0.9.9.1</Version>
+    <Authors>Narawit Khammanart</Authors>
+    <Company>Kamphaeng Saen Hospital</Company>
+    <PackageIcon>icon.ico</PackageIcon>
+    <PackageReleaseNotes>Beta Build สำหรับทดสอบการใช้งานภายในห้องยาผู้ป่วยนอก โรงพยาบาลกำแพงแสน</PackageReleaseNotes>
+    <NeutralLanguage />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <DefineConstants></DefineConstants>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>NU1605</WarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants></DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App.7z" />
+    <None Remove="Assets\Icon\error.png" />
+    <None Remove="Assets\Icon\ok.png" />
+    <None Remove="Assets\Icon\warning.png" />
+    <None Remove="Assets\Image\settings.png" />
+    <None Include="icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarcodeDrugCheckerLib\BarcodeDrugCheckerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icon\error.png" />
+    <Resource Include="Assets\Icon\ok.png" />
+    <Resource Include="Assets\Icon\warning.png" />
+    <Resource Include="Assets\Image\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
