@@ -8,6 +8,7 @@ namespace BarcodeDrugCheckerLib.DataAccess
         {
             return new MySQLDatabase();
             /*
+             * Multiple Database Support if needed.
             switch (DBType)
             {
                 case DatabaseType.mysql:

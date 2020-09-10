@@ -23,13 +23,13 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Height" Value="25" />
                 <Style.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LawnGreen"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LawnGreen" />
                 </Style.Resources>
                 <Style.Triggers>
                     <!--
                     <Trigger Property="IsSelected" Value="True">
                         <Setter Property="Background" Value="Blue" />
-                    </Trigger> -->
+                    </Trigger>-->
                     <DataTrigger Binding="{Binding BarcodeChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="false">
                         <Setter Property="Background" Value="White" />
                     </DataTrigger>
@@ -80,9 +80,9 @@
                                     Name="PatientID"
                                     Width="260"
                                     Margin="5,0"
-                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
                                     ext:FocusExtension.IsFocused="{Binding ShouldPatientHNFocus}"
                                     MaxLines="1"
+                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
                                     Style="{StaticResource TextboxText}">
                                     <TextBox.Text>
                                         <Binding
@@ -133,6 +133,12 @@
                             </StackPanel>
                         </StackPanel>
                         <TextBlock
+                            Margin="10,10,10,0"
+                            Style="{StaticResource StatusIndicatorText}"
+                            Text="{Binding LoadingText, Mode=OneWay}"
+                            Visibility="{Binding LoadingTextVisibility, Mode=OneWay}" />
+                        <TextBlock
+                            Margin="10"
                             Foreground="{Binding PatientMessageColor}"
                             Style="{StaticResource StatusIndicatorText}"
                             Text="{Binding PatientSearchChecker}"
@@ -192,13 +198,13 @@
                             <Label Content="{x:Static prop:Resources.lbl_icode}" Style="{StaticResource LabelText}" />
                             <StackPanel Margin="0,5" Orientation="Horizontal">
                                 <TextBox
-                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
                                     Name="ICodeTextBox"
                                     Width="260"
                                     Margin="5,0"
                                     ext:FocusExtension.IsFocused="{Binding ShouldICodeInputFocus}"
                                     IsEnabled="{Binding IsICodeInputEnable, Mode=OneWay}"
                                     MaxLines="1"
+                                    PreviewTextInput="OnlyNumeric_PreviewTextInput"
                                     Style="{StaticResource TextboxText}"
                                     Text="{Binding CurrentICode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.InputBindings>
@@ -228,13 +234,16 @@
                                 </InlineUIContainer>
                                 <Run Text="{Binding DrugListChecker, Mode=OneWay}" />
                             </TextBlock>
-                            <TextBlock Style="{StaticResource InfoText}" Foreground="{Binding CounterMessageColor, Mode=OneWay}" Text="{Binding DrugRemainCounterText, Mode=OneWay}" />
+                            <TextBlock
+                                Foreground="{Binding CounterMessageColor, Mode=OneWay}"
+                                Style="{StaticResource InfoText}"
+                                Text="{Binding DrugRemainCounterText, Mode=OneWay}" />
                         </StackPanel>
                         <DataGrid
                             Name="drugList"
                             MaxHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.15'}"
-                            AutoGenerateColumns="False"
                             ap:SelectingItemDatagrid.SelectingItem="{Binding SelectedDrug}"
+                            AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserDeleteRows="False"
                             ColumnHeaderStyle="{StaticResource DGColText}"

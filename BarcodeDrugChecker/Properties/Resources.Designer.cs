@@ -565,6 +565,15 @@ namespace BarcodeDrugChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to กำลังโหลดข้อมูล....
+        /// </summary>
+        public static string txt_loading {
+            get {
+                return ResourceManager.GetString("txt_loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to --- ไม่มีข้อมูลแสดง ---.
         /// </summary>
         public static string txt_noDataDG {

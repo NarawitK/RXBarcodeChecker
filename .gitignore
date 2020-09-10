@@ -8,3 +8,4 @@ Database/*
 App.config
 .vs/BarcodeDrugChecker/v16/.suo
 .vs/BarcodeDrugChecker/DesignTimeBuild/.dtbcache.v2
+BarcodeDrugChecker/BarcodeDrugChecker.csproj.user

@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using BarcodeDrugCheckerLib.Model.Interface;
 using System.Configuration;
+using BarcodeDrugChecker.Enums;
 
 namespace BarcodeDrugChecker.ViewModel
 {
@@ -27,52 +28,12 @@ namespace BarcodeDrugChecker.ViewModel
         private BitmapImage _dImg;
         public DBHandler _dbHandler { get; private set; }
         #endregion
-
-        #region SettingsProps
-        private string _usingDatabase;
-        private string _dataType;
-
-        public string UsingDatabase
-        {
-            get => _usingDatabase;
-            set
-            {
-                _usingDatabase = value;
-                OnPropertyChanged();
-            }
-        }
-        public string DataType
-        {
-            get => _dataType;
-            set
-            {
-                _dataType = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
-
         #region DataProps
         private string _CurrentPatientHN;
         private IPatient _Patient;
         private string _CurrentICode;
         public ObservableCollection<IDrugVisit> DrugRetrievalList { get; set; }
         private IDrugImage _DrugImage;
-
-        /*
-         * DrugList that selected in DG
-        private int _SelectedIndex;
-        public int SelectedIndex
-        {
-            get => _SelectedIndex;
-            set
-            {
-                _SelectedIndex = value;
-                OnPropertyChanged();
-            }
-        }
-        */
 
         private IDrugVisit _SelectedDrug;
         public IDrugVisit SelectedDrug
@@ -139,7 +100,19 @@ namespace BarcodeDrugChecker.ViewModel
         #endregion
 
         #region UIProps
-
+        //Loading Text
+        public string LoadingText { get; private set; } = Properties.Resources.txt_loading;
+        //Loading TextVisibility
+        private string _LoadingTextVisibility;
+        public string LoadingTextVisibility
+        {
+            get => _LoadingTextVisibility;
+            private set
+            {
+                _LoadingTextVisibility = value;
+                OnPropertyChanged();
+            }
+        }
 
         //Font Color
         private SolidColorBrush _PatientMessageColor;
@@ -356,7 +329,7 @@ namespace BarcodeDrugChecker.ViewModel
             NoImageTextVisibility = _Visible;
             ShouldPatientHNFocus = true;
             ShouldICodeInputFocus = IsICodeInputEnable = false;
-            PatientStatusMessageVisibility = PatientInfoVisibility = ICodeDataGridVisibility = ICodeStatusMessageVisibility = DrugImageVisibility = _Collapsed;
+            LoadingTextVisibility = PatientStatusMessageVisibility = PatientInfoVisibility = ICodeDataGridVisibility = ICodeStatusMessageVisibility = DrugImageVisibility = _Collapsed;
 
             _dbHandler = db;
 
@@ -365,7 +338,6 @@ namespace BarcodeDrugChecker.ViewModel
 
             DrugRetrievalList = new ObservableCollection<IDrugVisit>();
             FindPatientCommand = new RelayCommand(FindPatient, FindPatientCommand_CanExec);
-            //GetDrugListCommand = new RelayCommand(GetDrugList);
             ICodeInputCommand = new RelayCommand(ICodeInput, ICodeInputCommand_CanExec);
             ResetMainWindowCommand = new RelayCommand(ResetMainWindow);
         }
@@ -400,6 +372,7 @@ namespace BarcodeDrugChecker.ViewModel
         public RelayCommand FindPatientCommand { get; }
         private async void FindPatient()
         {
+            ChangeLoadingVisibility(Visibility.Visible);
             SearchFlag flag = SearchFlag.EmptyList;
             string message = CurrentPatientHN;
             try
@@ -453,6 +426,7 @@ namespace BarcodeDrugChecker.ViewModel
             finally
             {
                 PatientSearchMessage(flag, message);
+                ChangeLoadingVisibility(Visibility.Collapsed);
             }
         }
         public bool FindPatientCommand_CanExec()
@@ -463,7 +437,6 @@ namespace BarcodeDrugChecker.ViewModel
                 return false;
         }
 
-        //public RelayCommand GetDrugListCommand { get; }
         public async void GetDrugList() 
         {
             try
@@ -472,7 +445,10 @@ namespace BarcodeDrugChecker.ViewModel
                     DrugRetrievalList.Clear();
                 var FetchedDrug = await _dbHandler.GetDrugListfromPatient(CurrentPatientHN);
                 foreach (var item in FetchedDrug)
-                    DrugRetrievalList.Add(item);
+                {
+                    if(item.Quantity > 0) //Why do we need this crap ?
+                        DrugRetrievalList.Add(item);
+                }
                 PatientAllergyViewModel.GetPatientAllergies(CurrentPatientHN);
                 DrugInteractionViewModel.GetPatientDI(DrugRetrievalList);
                 DrugRemainCounter = (ushort)DrugRetrievalList.Count;
@@ -678,7 +654,7 @@ namespace BarcodeDrugChecker.ViewModel
             DrugInteractionViewModel.ResetDIControl();
 
             NoImageTextVisibility = _Visible;
-            PatientStatusMessageVisibility = PatientInfoVisibility = ICodeDataGridVisibility = ICodeStatusMessageVisibility = DrugImageVisibility =  _Collapsed;
+            LoadingTextVisibility = PatientStatusMessageVisibility = PatientInfoVisibility = ICodeDataGridVisibility = ICodeStatusMessageVisibility = DrugImageVisibility =  _Collapsed;
             ToggleTextboxFocus();
             IsICodeInputEnable = false;
         }
@@ -686,6 +662,11 @@ namespace BarcodeDrugChecker.ViewModel
         private void OnDataGridSelectedItem()
         {
             FetchDrugImg(SelectedDrug.ICode);
+        }
+
+        private void ChangeLoadingVisibility(Visibility visibility)
+        {
+            LoadingTextVisibility = visibility.ToString();
         }
 
         private void ClearSubControl()

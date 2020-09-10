@@ -285,6 +285,9 @@
   <data name="txt_icodeSendBtn" xml:space="preserve">
     <value>เช็ครหัสยา</value>
   </data>
+  <data name="txt_loading" xml:space="preserve">
+    <value>กำลังโหลดข้อมูล...</value>
+  </data>
   <data name="txt_noDataDG" xml:space="preserve">
     <value>--- ไม่มีข้อมูลแสดง ---</value>
   </data>

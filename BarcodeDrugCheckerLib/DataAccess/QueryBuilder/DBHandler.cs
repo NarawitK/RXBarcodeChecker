@@ -32,6 +32,13 @@ namespace BarcodeDrugCheckerLib.DataAccess.QueryBuilder
             }
         }
 
+        /*
+        public void CancelQuery()
+        {
+            Db.Command.Cancel();
+        }
+        */
+
         public string GetDBConnectionStatus()
         {
             return Db.Connection.State.ToString();

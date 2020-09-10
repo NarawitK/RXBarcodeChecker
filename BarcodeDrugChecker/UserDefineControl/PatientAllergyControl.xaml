@@ -20,7 +20,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Visibility="Visible">
-            <!--{Binding Visibility, Mode=OneWay}-->
+            <!--  {Binding Visibility, Mode=OneWay}  -->
             <GroupBox.Header>
                 <TextBlock Style="{StaticResource TitleText}" Text="Drug Allergy" />
             </GroupBox.Header>

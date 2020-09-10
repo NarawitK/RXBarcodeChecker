@@ -1,6 +1,7 @@
 ﻿using BarcodeDrugChecker.Commands;
 using BarcodeDrugCheckerLib.DataAccess.Interface;
 using BarcodeDrugCheckerLib.DataAccess.QueryBuilder;
+using MySqlConnector;
 using System;
 using System.Configuration;
 using System.Runtime.InteropServices;
@@ -165,7 +166,7 @@ namespace BarcodeDrugChecker.ViewModel
             {
                 var securestring = passwordContainer.Password;
                 var unsecure_password = ConvertToUnsecureString(securestring);
-                var csb = new MySql.Data.MySqlClient.MySqlConnectionStringBuilder()
+                var csb = new MySqlConnectionStringBuilder()
                 {
                     Server = DBServer,
                     Port = DBPort,
@@ -246,7 +247,7 @@ namespace BarcodeDrugChecker.ViewModel
 
         private void SetUIFromConnectionString(string connstr)
         {
-            var csb = new MySql.Data.MySqlClient.MySqlConnectionStringBuilder(connstr);
+            var csb = new MySqlConnectionStringBuilder(connstr);
             DBServer = csb.Server;
             DBPort = csb.Port;
             DBUsername = csb.UserID;
